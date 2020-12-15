@@ -26,7 +26,7 @@ class AssetPickers {
 
   static Future<List> getAssets(
       {AssetsType assetType = AssetsType.imageOnly, int imageCount = 9}) async {
-    Map map = {'assetType': getAssetType(assetType)};
+    Map map = {'assetType': getAssetType(assetType), 'imageCount': imageCount};
     final List assets = await _channel.invokeMethod('get_assets', map);
     return assets;
   }

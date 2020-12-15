@@ -33,9 +33,10 @@
   NSDictionary *dict = call.arguments;
   if ([@"get_assets" isEqualToString:call.method]) {
      NSString *assetType = [NSString stringWithFormat:@"%@",[dict objectForKey:@"assetType"]];
-
+    NSInteger imageCount = [[dict objectForKey:@"imageCount"] integerValue];
     self.result = result;
-    [self handleAssetType:assetType];
+    [self handleAssetType:assetType
+               imageCount:imageCount];
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -49,9 +50,9 @@
   return self;
 }
 
-- (void)handleAssetType:(NSString *)assetType {
+- (void)handleAssetType:(NSString *)assetType imageCount:(NSInteger)imageCount{
     
-    LFImagePickerController *imagePicker = [[LFImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];//这里设置最大选择数，图片和视频的
+    LFImagePickerController *imagePicker = [[LFImagePickerController alloc] initWithMaxImagesCount:imageCount delegate:self];//这里设置最大选择数，图片和视频的
     imagePicker.allowTakePicture = NO;
     imagePicker.allowPickingOriginalPhoto = NO;
     
